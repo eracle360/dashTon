@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= app.appName %> - TON DASH</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="container mt-5">
+        <div class="card">
+            <img src="<%= app.icon %>" class="card-img-top" alt="<%= app.appName %>">
+            <div class="card-body">
+                <h1 class="card-title"><%= app.appName %></h1>
+                <p class="card-text"><%= app.description %></p>
+                <ul>
+                    <li>Category: <%= app.category %></li>
+                    <li>Languages: <%= app.languages %></li>
+                    <li>Website: <a href="<%= app.website %>" target="_blank"><%= app.website %></a></li>
+                    <li>Telegram: <a href="<%= app.telegram %>" target="_blank"><%= app.telegram %></a></li>
+                    <li>Social Media: <a href="<%= app.socialMedia %>" target="_blank"><%= app.socialMedia %></a></li>
+                    <% if (app.appStore) { %>
+                        <li>App Store: <a href="<%= app.appStore %>" target="_blank"><%= app.appStore %></a></li>
+                    <% } %>
+                    <% if (app.googlePlay) { %>
+                        <li>Google Play: <a href="<%= app.googlePlay %>" target="_blank"><%= app.googlePlay %></a></li>
+                    <% } %>
+                    <% if (app.github) { %>
+                        <li>Github: <a href="<%= app.github %>" target="_blank"><%= app.github %></a></li>
+                    <% } %>
+                </ul>
+                <% if (app.screenshots.length > 0) { %>
+                    <h3>Screenshots</h3>
+                    <div class="row">
+                        <% app.screenshots.forEach(screenshot => { %>
+                            <div class="col-md-4">
+                                <img src="<%= screenshot %>" class="img-fluid" alt="Screenshot">
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } %>
+                <% if (app.video) { %>
+                    <h3>Video</h3>
+                    <video controls>
+                        <source src="<%= app.video %>" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <%- include('partials/footer') %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

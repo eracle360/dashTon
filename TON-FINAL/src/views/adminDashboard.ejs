@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - TON DASH</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <style>
+        .table-actions {
+            display: flex;
+            justify-content: space-around;
+        }
+    </style>
+</head>
+<body>
+    <%- include('partials/header') %>
+    <div class="container mt-5">
+        <h1>Admin Dashboard</h1>
+        <h2>Pending Apps</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>App Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% pendingApps.forEach(app => { %>
+                    <tr>
+                        <td><%= app.appName %></td>
+                        <td class="table-actions">
+                            <form action="/admin/approve/<%= app._id %>" method="POST">
+                                <button type="submit" class="btn btn-success">Approve</button>
+                            </form>
+                            <form action="/admin/delete/<%= app._id %>" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <h2>Approved Apps</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>App Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% approvedApps.forEach(app => { %>
+                    <tr>
+                        <td><%= app.appName %></td>
+                        <td class="table-actions">
+                            <form action="/admin/delete/<%= app._id %>" method="POST">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+    <%- include('partials/footer') %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
